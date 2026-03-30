@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The Ethereal Curator | Portfolio</title>
+<style>
+/* ── Reset ─────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+/* ── Tokens ─────────────────────────────────────────────────────────── */
+:root {
+  --surface:            #faf9fc;
+  --surface-low:        #f4f3f8;
+  --surface-container:  #eeedf3;
+  --surface-high:       #e8e7ee;
+  --surface-highest:    #e2e2ea;
+  --surface-white:      #ffffff;
+  --on-surface:         #303238;
+  --on-surface-var:     #5d5f65;
+  --primary:            #695397;
+  --primary-dim:        #5d478a;
+  --primary-container:  #c8affb;
+  --on-primary:         #fdf7ff;
+  --secondary-container:#e8def9;
+  --on-secondary-cont:  #554e64;
+  --tertiary-container: #e2cffe;
+  --on-tertiary-cont:   #52446a;
+  --outline:            #797a81;
+  --outline-var:        #b1b1b9;
+  --radius-sm:  0.5rem;
+  --radius-md:  0.75rem;
+  --radius-lg:  1rem;
+  --radius-xl:  1.5rem;
+  --radius-full:9999px;
+  --font-head: 'Georgia', 'Times New Roman', serif;
+  --font-body: 'Trebuchet MS', 'Segoe UI', Helvetica, Arial, sans-serif;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.08);
+  --shadow-md: 0 4px 16px rgba(105,83,151,.15);
+  --shadow-lg: 0 8px 32px rgba(105,83,151,.18);
+}
+
+/* ── Base ───────────────────────────────────────────────────────────── */
+body {
+  font-family: var(--font-body);
+  background: var(--surface);
+  color: var(--on-surface);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; width: 100%; height: 100%; object-fit: cover; }
+a { text-decoration: none; color: inherit; }
+
+/* ── Utility ─────────────────────────────────────────────────────────── */
+.max-w { max-width: 1200px; margin-inline: auto; }
+.section-pad { padding: 6rem 2rem; }
+@media (min-width: 768px) { .section-pad { padding: 6rem 4rem; } }
+@media (min-width: 1024px){ .section-pad { padding: 6rem 6rem; } }
+
+/* ── NAV ─────────────────────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(250,249,252,.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(177,177,185,.3);
+}
+.nav-inner {
+  max-width: 1200px; margin-inline: auto;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 2rem;
+}
+@media (min-width: 768px) { .nav-inner { padding: 1rem 4rem; } }
+.nav-logo {
+  font-family: var(--font-head);
+  font-size: 1.5rem; font-weight: 700;
+  color: var(--primary); letter-spacing: -0.02em;
+}
+.nav-links { display: none; gap: 2rem; }
+@media (min-width: 768px) { .nav-links { display: flex; } }
+.nav-links a {
+  font-size: .875rem; font-weight: 600;
+  color: var(--on-surface-var); letter-spacing: .04em;
+  transition: color .2s;
+}
+.nav-links a:hover { color: var(--primary); }
+.btn-primary {
+  background: var(--primary);
+  color: var(--on-primary);
+  border: none; cursor: pointer;
+  padding: .625rem 1.5rem;
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: .875rem; font-weight: 700;
+  transition: background .2s, transform .15s;
+  display: inline-block;
+}
+.btn-primary:hover { background: var(--primary-dim); transform: scale(1.03); }
+.btn-primary:active { transform: scale(.97); }
+
+/* ── HERO ─────────────────────────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  padding-top: 80px;
+  display: flex; align-items: center;
+}
+.hero-inner {
+  max-width: 1200px; margin-inline: auto;
+  padding: 4rem 2rem;
+  display: flex; flex-direction: column; gap: 3rem; align-items: center;
+}
+@media (min-width: 768px) {
+  .hero-inner { flex-direction: row; padding: 4rem; gap: 4rem; }
+}
+@media (min-width: 1024px) { .hero-inner { padding: 4rem 6rem; } }
+
+.hero-text { flex: 1; order: 2; }
+@media (min-width: 768px) { .hero-text { order: 1; } }
+
+.hero h1 {
+  font-family: var(--font-head);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--on-surface);
+  margin-bottom: 1.5rem;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--primary);
+}
+.hero-sub {
+  color: var(--on-surface-var);
+  font-size: 1.1rem; line-height: 1.7;
+  max-width: 30rem;
+  margin-bottom: 2.5rem;
+}
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 1rem; }
+.btn-outline {
+  display: inline-block;
+  border: 1.5px solid var(--outline-var);
+  color: var(--primary);
+  padding: .875rem 2rem;
+  border-radius: var(--radius-full);
+  font-size: .9375rem; font-weight: 700;
+  transition: background .2s, border-color .2s;
+}
+.btn-outline:hover { background: var(--surface-low); border-color: var(--primary); }
+.btn-hero {
+  display: inline-block;
+  background: var(--primary);
+  color: var(--on-primary);
+  padding: .875rem 2rem;
+  border-radius: var(--radius-full);
+  font-size: .9375rem; font-weight: 700;
+  box-shadow: var(--shadow-md);
+  transition: transform .2s, box-shadow .2s;
+}
+.btn-hero:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+
+.hero-visual {
+  flex: 1; order: 1; display: flex; justify-content: center;
+  position: relative;
+}
+@media (min-width: 768px) { .hero-visual { order: 2; justify-content: flex-end; } }
+
+.hero-avatar {
+  width: min(280px, 70vw); height: min(280px, 70vw);
+  border-radius: 50%;
+  overflow: hidden;
+  border: 6px solid var(--surface-white);
+  box-shadow: var(--shadow-lg);
+  position: relative; z-index: 2;
+}
+@media (min-width: 1024px) {
+  .hero-avatar { width: 380px; height: 380px; }
+}
+.hero-blob {
+  position: absolute;
+  width: 120%; height: 120%;
+  top: 50%; left: 50%;
+  transform: translate(-40%, -50%);
+  background: var(--primary-container);
+  opacity: .25;
+  border-radius: 50%;
+  filter: blur(60px);
+  z-index: 0;
+}
+
+/* Image placeholder (shown when src is broken / no internet) */
+.img-placeholder {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--surface-container);
+  color: var(--on-surface-var);
+  font-size: .8rem; text-align: center; padding: 1rem;
+}
+
+/* ── ABOUT ─────────────────────────────────────────────────────────────── */
+.about { background: var(--surface-low); }
+.about-inner {
+  display: flex; flex-direction: column; gap: 3rem; align-items: center;
+}
+@media (min-width: 768px) {
+  .about-inner { flex-direction: row; gap: 4rem; }
+}
+.about-img {
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 1;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  flex-shrink: 0;
+}
+@media (min-width: 768px) { .about-img { width: 42%; } }
+
+.label-tag {
+  display: block;
+  font-size: .7rem; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+.about h2 {
+  font-family: var(--font-head);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700; letter-spacing: -0.02em;
+  color: var(--on-surface);
+  margin-bottom: 1.25rem;
+}
+.about p {
+  color: var(--on-surface-var);
+  font-size: 1rem; line-height: 1.8;
+  margin-bottom: 2rem;
+}
+.pills { display: flex; flex-wrap: wrap; gap: .75rem; }
+.pill {
+  padding: .4rem 1rem;
+  border-radius: var(--radius-full);
+  font-size: .8125rem; font-weight: 600;
+}
+.pill-purple { background: var(--secondary-container); color: var(--on-secondary-cont); }
+.pill-violet { background: var(--tertiary-container); color: var(--on-tertiary-cont); }
+.pill-red    { background: #fdf2f2; color: #9b1c1c; }
+.pill-green  { background: #f0fdf4; color: #166534; }
+
+/* ── PROJECTS ─────────────────────────────────────────────────────────── */
+.projects-header {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 3.5rem;
+}
+.projects-header h2 {
+  font-family: var(--font-head);
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 700; letter-spacing: -0.03em;
+  color: var(--on-surface);
+}
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+@media (min-width: 640px)  { .grid-3 { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1024px) { .grid-3 { grid-template-columns: 1fr 1fr 1fr; } }
+
+.card {
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  transition: transform .25s, box-shadow .25s;
+  cursor: default;
+}
+.card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+.card-purple { background: var(--surface-highest); }
+.card-green  { background: #f0fdf4; }
+.card-peach  { background: #fff7ed; }
+
+.card-img {
+  aspect-ratio: 4/3;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+}
+.card-img-bg-purple { background: rgba(200,175,251,.3); }
+.card-img-bg-green  { background: #dcfce7; }
+.card-img-bg-peach  { background: #ffedd5; }
+
+.card img { transition: transform .5s; }
+.card:hover .card-img img { transform: scale(1.05); }
+
+.card h3 {
+  font-family: var(--font-head);
+  font-size: 1.2rem; font-weight: 700;
+  margin-bottom: .5rem;
+}
+.card p  { font-size: .875rem; line-height: 1.6; margin-bottom: 1.25rem; }
+
+.card-link {
+  display: inline-flex; align-items: center; gap: .4rem;
+  font-size: .875rem; font-weight: 700;
+  transition: gap .2s;
+}
+.card-link:hover { gap: .7rem; }
+.card-link::after { content: '→'; }
+
+.text-purple { color: var(--primary); }
+.text-green  { color: #166534; }
+.text-peach  { color: #9a3412; }
+
+/* ── CONTACT ─────────────────────────────────────────────────────────── */
+.contact { max-width: 860px; }
+.contact-head { text-align: center; margin-bottom: 3.5rem; }
+.contact-head h2 {
+  font-family: var(--font-head);
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 700; letter-spacing: -0.02em;
+  margin-bottom: .75rem;
+}
+.contact-head p { color: var(--on-surface-var); }
+
+.contact-box {
+  background: var(--surface-low);
+  border-radius: var(--radius-xl);
+  padding: 2.5rem;
+}
+@media (min-width: 768px) { .contact-box { padding: 3.5rem; } }
+
+.form-row { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+@media (min-width: 640px) { .form-row { grid-template-columns: 1fr 1fr; } }
+
+.form-group { display: flex; flex-direction: column; gap: .5rem; }
+.form-group label {
+  font-size: .7rem; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--on-surface-var);
+}
+.form-group input,
+.form-group textarea {
+  background: var(--surface-white);
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  font-family: var(--font-body);
+  font-size: .9375rem;
+  color: var(--on-surface);
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+  resize: vertical;
+}
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(105,83,151,.1);
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: var(--outline-var); }
+
+.btn-submit {
+  width: 100%;
+  background: var(--primary);
+  color: var(--on-primary);
+  border: none; cursor: pointer;
+  padding: 1rem;
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: 1rem; font-weight: 700;
+  margin-top: .5rem;
+  box-shadow: 0 4px 20px rgba(105,83,151,.2);
+  transition: opacity .2s, transform .15s;
+}
+.btn-submit:hover { opacity: .9; }
+.btn-submit:active { transform: scale(.98); }
+
+/* ── FOOTER ───────────────────────────────────────────────────────────── */
+footer {
+  border-top: 1px solid #e5e7eb;
+  background: #f9fafb;
+  padding: 3rem 2rem;
+}
+@media (min-width: 768px) { footer { padding: 3rem 4rem; } }
+.footer-inner {
+  max-width: 1200px; margin-inline: auto;
+  display: flex; flex-direction: column; gap: 1.5rem;
+  align-items: flex-start;
+}
+@media (min-width: 768px) {
+  .footer-inner { flex-direction: row; justify-content: space-between; align-items: center; }
+}
+.footer-logo {
+  font-family: var(--font-head);
+  font-size: 1.125rem; font-weight: 700; color: #111827;
+  margin-bottom: .25rem;
+}
+.footer-copy { font-size: .78rem; color: #6b7280; letter-spacing: .05em; text-transform: uppercase; }
+.footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+.footer-links a {
+  font-size: .78rem; font-weight: 600;
+  letter-spacing: .07em; text-transform: uppercase;
+  color: #6b7280; transition: color .2s;
+}
+.footer-links a:hover { color: var(--primary); }
+
+/* ── Animations ───────────────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero h1       { animation: fadeUp .7s ease both; }
+.hero-sub      { animation: fadeUp .7s .12s ease both; }
+.hero-ctas     { animation: fadeUp .7s .22s ease both; }
+.hero-visual   { animation: fadeUp .8s .08s ease both; }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">YN</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="btn-primary" href="#contact">Get in Touch</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-inner max-w">
+    <div class="hero-text">
+      <h1>Crafting Digital <br/><em>Experiences</em> with Soul.</h1>
+      <p class="hero-sub">
+        A multidisciplinary designer and developer focused on building high-end editorial interfaces that balance aesthetics and functionality.
+      </p>
+      <div class="hero-ctas">
+        <a class="btn-hero" href="#projects">View Work</a>
+        <a class="btn-outline" href="#contact">Contact Me</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-blob"></div>
+      <div class="hero-avatar">
+        <!-- Замените src на путь к вашему фото, например: src="images/photo.jpg" -->
+        <img
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuCW7nNTl28k66rXr9GJamG5RoP-LWcj8bwX3dqNzMer1aGWpkp2oy9CVbK9MhFduQDgSYEaC9QiqXYforsL3qUztZutNwjcpOpXs7eQZ79IyP8lMPu6PBrvSy0E5aPHm1Eu5aKrkbZlcA6iGhT-nnRDEEb4g--k8HPAHzSFZ6en9MZ1ZE5u-MRav4MXi7GyQ4Hx-rKpCmQ9gk6yr5qSuy7NXmsXHQaP3RKir4uhQHrkyIFZAOhSScxqCiZcbE_ccY7HF04a44d5Mgc"
+          alt="YN Portrait"
+          onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'img-placeholder\'>Добавьте своё фото:<br/>src=\'images/photo.jpg\'</div>'"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section class="about section-pad" id="about">
+  <div class="about-inner max-w">
+    <div class="about-img">
+      <!-- Замените src на путь к вашему фото студии/рабочего места -->
+      <img
+        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrMenIInDh77dU1TlE8lKy5aRQSv9czYC7mIXe5Y5eiVtw1eeHHYEyFQnGN14vDNE1hYMvZLYQiHJ1FXnbqR_dU0u5EUdBdRPRCW4NDTzvLGsWzVoinF4vrASpT1DLgQc8Te-fLJUQ-4F3MGhzXDdjL8rI0XBo_8104HYSj8XiG-7UIrRD2m7mTQY_rgrqTWzMhcKJcUlbwxKGsLG5SRvPPzZD0jOBv99neT2kC0yw4AOCpPbRiSI9Xy1tk-Lbh-Ny22A69bmJdTc"
+        alt="Studio Space"
+        onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'img-placeholder\'>Добавьте фото рабочего места:<br/>src=\'images/studio.jpg\'</div>'"
+      />
+    </div>
+    <div>
+      <span class="label-tag">About Me</span>
+      <h2>Merging code and curation.</h2>
+      <p>
+        Based in the intersection of design systems and frontend development, I specialize in creating digital platforms that feel bespoke. My process involves deep research into brand identity followed by precise execution of UI patterns that prioritize the user's emotional journey.
+      </p>
+      <div class="pills">
+        <span class="pill pill-purple">React</span>
+        <span class="pill pill-violet">Node.js</span>
+        <span class="pill pill-red">Design</span>
+        <span class="pill pill-green">Python</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROJECTS ── -->
+<section class="section-pad" id="projects">
+  <div class="max-w">
+    <div class="projects-header">
+      <div>
+        <span class="label-tag">Selected Works</span>
+        <h2>The Portfolio</h2>
+      </div>
+    </div>
+
+    <div class="grid-3">
+
+      <!-- Card 1 -->
+      <div class="card card-purple">
+        <div class="card-img card-img-bg-purple">
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuClOJ8VnqoZMZIxmqS-Cf005lMod-z-ZjN_YKIAuVXFEKc4vz30838vxWP4Wb4lG-scDN1-UTL9-lEQjFCAaPgkVVav-Fu2Ou02VDDg81wrx5Rm0eHQ_Wvx-IKYnxMrCG-uDWcNru0h7SGys72jdBsJ6te5nRURGLUeDyMi4HqrqjxsWtWi39OQZYAcds-bHgpIUIH_Yhf2h-fcwaGMm6rn2H2Kr4q1MiAWRj-60eO4odWfmIvEaWt-BSuaSq0LZMPbuUK5mT7eBoI"
+            alt="Lumina App"
+            onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'img-placeholder\'>images/project1.jpg</div>'"
+          />
+        </div>
+        <div style="padding: 0 .5rem .75rem;">
+          <h3>Lumina App</h3>
+          <p class="text-purple" style="color: var(--on-surface-var);">A wellness tracking application designed with tranquility and soft visual cues in mind.</p>
+          <a class="card-link text-purple" href="#">View project</a>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card card-green">
+        <div class="card-img card-img-bg-green">
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDj-iSQ44xA5phjGClyJH1uAgLJ73jW3TawqMCwhXtB3pK5c6Q3T2TP79gxzFwMNixN12O2BSo7b0EjRraD2x-KaTMqJUXLEf8SDbHob_TxikJbUXiHdukxLCJpS62TE5YvVlmkE8tRHLQ9-Xi5pAF5-2CG9oAQqSXJG0r9cXqR__CVOhic6jPV5WQh8cB9qmVCxxnFn549MdpkZqziCRn1a6wPIO7XSejul-1hLlhDDjVB9jUFtxo4vf3PGwbayloDGFNPfLFUrQU"
+            alt="EcoTrace"
+            onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'img-placeholder\'>images/project2.jpg</div>'"
+          />
+        </div>
+        <div style="padding: 0 .5rem .75rem;">
+          <h3 class="text-green">EcoTrace</h3>
+          <p style="color: rgba(22,101,52,.7);">Supply chain transparency dashboard for sustainable fashion brands using clear data visualization.</p>
+          <a class="card-link text-green" href="#">View project</a>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card card-peach">
+        <div class="card-img card-img-bg-peach">
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAZ5dVF_asLKz59Pebpj-Kzuj8KCR5FTTDDTEfetDOCfbTk9eOLCEE7GX8DHBNalDQLbWPVyHj1lG0C3nyRYfsjeED7vBonuZ-sZqRuidVektFIGqmM-m88P32kUQo81Mn4eay8AcaUvpa-X5fIQxtohgQ7FJNj0oggHEoCWQryKGPcCJ_5-MH5uYIXV9orkKGYQS1e7yqavZBY5tAXVIHoNS5qHa0ClumJ8InnhzBlr51i5BrBUSrYq6fmwsr9YJmvB52stR7c30"
+            alt="Gallery Collective"
+            onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'img-placeholder\'>images/project3.jpg</div>'"
+          />
+        </div>
+        <div style="padding: 0 .5rem .75rem;">
+          <h3 class="text-peach">Gallery Collective</h3>
+          <p style="color: rgba(154,52,18,.7);">An online archival system for independent artists to showcase their collections in an editorial format.</p>
+          <a class="card-link text-peach" href="#">View project</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section class="section-pad" id="contact">
+  <div class="contact max-w">
+    <div class="contact-head">
+      <h2>Let's build something together.</h2>
+      <p>Have a project in mind? Reach out and let's discuss how we can elevate your brand.</p>
+    </div>
+    <div class="contact-box">
+      <form onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input id="name" type="text" placeholder="Your name" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="hello@example.com" required />
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label for="message">Message</label>
+          <textarea id="message" rows="5" placeholder="Tell me about your project..." required></textarea>
+        </div>
+        <button class="btn-submit" type="submit">Send message</button>
+        <p id="form-feedback" style="text-align:center; margin-top:1rem; color:var(--primary); font-weight:600; display:none;">
+          ✓ Message sent! I'll get back to you soon.
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">YN</div>
+      <p class="footer-copy">© 2024 The Ethereal Curator. Crafted with intention.</p>
+    </div>
+    <div class="footer-links">
+      <a href="#">LinkedIn</a>
+      <a href="#">Dribbble</a>
+      <a href="#">GitHub</a>
+      <a href="#">Instagram</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* Smooth scroll for nav links */
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  /* Nav shadow on scroll */
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.boxShadow = window.scrollY > 10
+      ? '0 2px 16px rgba(0,0,0,.08)'
+      : 'none';
+  });
+
+  /* Contact form feedback (без бэкенда — просто показывает подтверждение) */
+  function handleSubmit(e) {
+    e.preventDefault();
+    const fb = document.getElementById('form-feedback');
+    fb.style.display = 'block';
+    e.target.reset();
+    setTimeout(() => fb.style.display = 'none', 5000);
+  }
+</script>
+</body>
+</html>
